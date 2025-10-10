@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SixSecondWriter</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <div class="setup-screen" id="setupScreen">
+            <h1>six second writer</h1>
+            <p> from that dreaded email to the story of your dreams, <b>stop for 6 seconds and poof — it’s gone.</b>
+            <p> set your timer and start writing, if you dare.</p>
+            <div class="time-options">
+                <button class="time-btn" onclick="startWriting(3)">3 mins</button>
+                <button class="time-btn" onclick="startWriting(5)">5 mins</button>
+                <button class="time-btn" onclick="startWriting(10)">10 mins</button>
+                <button class="time-btn" onclick="startWriting(20)">20 mins</button>
+            </div>
+        </div>
+
+        <!-- Writing Screen -->
+        <div class="writing-screen hidden" id="writingScreen">
+            <div class="red-overlay" id="redOverlay"></div>
+            <div class="timer-display" id="timerDisplay">Time: 00:00</div>
+            <textarea id="notepad" placeholder="Start typing now..."></textarea>
+        </div>
+
+        <!-- Complete Screen -->
+        <div class="complete-screen hidden" id="completeScreen">
+            <h1>Session Complete!</h1>
+            
+            <div class="api-section">
+                <p>Want to write more?</p>
+                <div class="time-options">
+                    <button class="time-btn" onclick="extendTime(1)">+1 min</button>
+                    <button class="time-btn" onclick="extendTime(3)">+3 mins</button>
+                    <button class="time-btn" onclick="extendTime(5)">+5 mins</button>
+                    <button class="time-btn" onclick="extendTime(10)">+10 mins</button>
+                </div>
+            </div>
+            
+            <p style="margin: 15px 0 8px 0; font-size: 13px;">Your text:</p>
+            <div class="output-text" id="outputText"></div>
+            <button class="action-btn" onclick="copyText()">Copy Text</button>
+            <button class="action-btn" onclick="restart()">Start Over</button>
+        </div>
+    </div>
+    <script src="script.js"></script>
+</body>
+</html>

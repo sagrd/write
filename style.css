@@ -1,0 +1,231 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+body {
+    font-family: monospace;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: white;
+}
+.container {
+    width: 100%;
+    max-width: 800px;
+    padding: 20px;
+}
+.setup-screen, .writing-screen {
+    background: white;
+    padding: 40px;
+    border-radius: 8px;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.3);
+}
+.complete-screen {
+    background: white;
+    padding: 40px;
+    border-radius: 8px;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.3);
+    max-height: 90vh;
+    overflow-y: auto;
+}
+.setup-screen h1, .complete-screen h1 {
+    margin-bottom: 20px;
+    color: #333;
+}
+.setup-screen p {
+    margin-bottom: 30px;
+    color: #666;
+    line-height: 1.6;
+}
+.time-options {
+    display: flex;
+    gap: 15px;
+    flex-wrap: wrap;
+}
+.time-btn {
+    padding: 10px 20px;
+    border: 1px solid #666;
+    background: white;
+    cursor: pointer;
+    font-size: 14px;
+    border-radius: 4px;
+    transition: all 0.2s;
+}
+.time-btn:hover {
+    background: #666;
+    color: white;
+}
+.writing-screen {
+    position: relative;
+    min-height: 500px;
+    padding: 0;
+    overflow: hidden;
+}
+.red-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(255, 0, 0, 0);
+    pointer-events: none;
+    transition: background 0.3s;
+    z-index: 1;
+}
+#notepad {
+    width: 100%;
+    height: 500px;
+    padding: 40px;
+    padding-top: 50px;
+    border: none;
+    outline: none;
+    font-family: monospace;
+    font-size: 16px;
+    resize: none;
+    position: relative;
+    z-index: 0;
+    background: transparent;
+}
+.timer-display {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    background: rgba(0,0,0,0.8);
+    color: white;
+    padding: 8px 16px;
+    border-radius: 4px;
+    font-size: 12px;
+    z-index: 2;
+}
+.style-options {
+    display: none;
+}
+.style-btn {
+    padding: 8px 16px;
+    border: 1px solid #666;
+    background: white;
+    cursor: pointer;
+    font-size: 13px;
+    border-radius: 4px;
+    transition: all 0.2s;
+}
+.style-btn:hover, .style-btn.active {
+    background: #666;
+    color: white;
+}
+.output-text {
+    margin: 20px 0;
+    padding: 20px;
+    background: #f5f5f5;
+    border-radius: 4px;
+    min-height: 200px;
+    white-space: pre-wrap;
+    font-family: monospace;
+}
+.action-btn {
+    padding: 8px 20px;
+    background: #666;
+    color: white;
+    border: none;
+    cursor: pointer;
+    font-size: 13px;
+    border-radius: 4px;
+    margin-right: 10px;
+    margin-top: 5px;
+}
+.action-btn:hover {
+    background: #444;
+}
+.api-section {
+    margin: 15px 0;
+    padding: 15px;
+    background: #f9f9f9;
+    border-radius: 4px;
+    border: 1px solid #ddd;
+}
+.api-section p {
+    margin: 0 0 8px 0;
+    font-size: 13px;
+    font-weight: 600;
+}
+.api-row {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    flex-wrap: wrap;
+}
+.api-input {
+    flex: 1;
+    min-width: 200px;
+    max-width: 350px;
+    padding: 8px 12px;
+    font-family: monospace;
+    font-size: 12px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+.help-link {
+    color: #0066cc;
+    cursor: pointer;
+    text-decoration: underline;
+    font-size: 12px;
+    white-space: nowrap;
+}
+.modal {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0,0,0,0.7);
+    z-index: 1000;
+    justify-content: center;
+    align-items: center;
+}
+.modal-content {
+    background: white;
+    padding: 30px;
+    border-radius: 8px;
+    max-width: 500px;
+    max-height: 80vh;
+    overflow-y: auto;
+}
+.modal-content h2 {
+    margin-bottom: 15px;
+}
+.modal-content ol {
+    margin: 15px 0;
+    padding-left: 20px;
+}
+.modal-content li {
+    margin: 10px 0;
+    line-height: 1.6;
+}
+.close-modal {
+    background: #333;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    cursor: pointer;
+    border-radius: 4px;
+    margin-top: 15px;
+}
+.processing {
+    color: #666;
+    font-style: italic;
+}
+@keyframes dots {
+    0%, 20% { content: '.'; }
+    40% { content: '..'; }
+    60%, 100% { content: '...'; }
+}
+.loading::after {
+    content: '.';
+    animation: dots 1.5s steps(1) infinite;
+}
+.hidden {
+    display: none;
+}

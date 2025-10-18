@@ -100,7 +100,10 @@ body {
     z-index: 2;
 }
 .style-options {
-    display: none;
+    display: flex;
+    gap: 15px;
+    margin: 20px 0;
+
 }
 .style-btn {
     padding: 8px 16px;

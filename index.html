@@ -13,7 +13,7 @@
             <p>Having trouble writing? From that dreaded email to the story you’ve been putting off — this tool helps you break through writer’s block. <b> Stop typing for a six seconds, and everything vanishes.</b></p>
             <p>We don’t store or see your notes — everything stays just on your browser. <a href="https://github.com/sagrd/write" target="_blank" rel="noopener noreferrer">Promise!</a></p>
             <div class="time-options">
-                <button class="time-btn" onclick="startWriting(3)">3 mins</button>
+                <button class="time-btn" onclick="startWriting(0.25)">3 mins</button>
                 <button class="time-btn" onclick="startWriting(5)">5 mins</button>
                 <button class="time-btn" onclick="startWriting(10)">10 mins</button>
                 <button class="time-btn" onclick="startWriting(20)">20 mins</button>
@@ -40,12 +40,45 @@
                     <button class="time-btn" onclick="extendTime(10)">+10 mins</button>
                 </div>
             </div>
+
+            <div class="api-section">
+                <p>Enable AI Rephrasing (Optional)</p>
+                <div class="api-row">
+                    <input type="password" class="api-input" id="apiKey" placeholder="Enter your Gemini API Key">
+                    <button class="action-btn" onclick="saveApiKey()">Save Key</button>
+                    <span class="help-link" onclick="showApiHelp()">How to get a free key?</span>
+                </div>
+            </div>
+            <div class="style-options">
+                <button class="style-btn" onclick="selectStyle('original')">Original Text</button>
+                <button class="style-btn" onclick="selectStyle('business')" id="businessBtn">Business</button>
+                <button class="style-btn" onclick="selectStyle('casual')" id="casualBtn"> Casual</button>
+                <button class="style-btn" onclick="selectStyle('correct')" id="correctBtn">Correct</button>
+            </div>
             
             <p style="margin: 15px 0 8px 0; font-size: 13px;">Your text:</p>
             <div class="output-text" id="outputText"></div>
             <button class="action-btn" onclick="copyText()">Copy Text</button>
             <button class="action-btn" onclick="restart()">Start Over</button>
         </div>
+
+        <!-- API Help Modal -->
+        <div class="modal" id="apiModal">
+            <div class="modal-content">
+                <h2>How to Get a Gemini API Key</h2>
+                <ol>
+                    <li>Visit <strong>Google AI Studio</strong> at <a href="https://aistudio.google.com/app/apikey" target="_blank">aistudio.google.com/app/apikey</a></li>
+                    <li>Sign in with your Google account</li>
+                    <li>Click on <strong>"Get API key"</strong> button</li>
+                    <li>Choose <strong>"Create API key in new project"</strong> or select an existing project</li>
+                    <li>Copy the generated API key</li>
+                    <li>Paste it in the API Key field above</li>
+                </ol>
+                <p><strong>Note:</strong> The API key will only be stored in your browser session and never sent to any server except Google's Gemini API.</p>
+                <button class="close-modal" onclick="closeApiHelp()">Close</button>
+            </div>
+        </div>
+    </div>
     </div>
     <script src="script.js"></script>
 </body>

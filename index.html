@@ -3,15 +3,49 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Type.Work</title>
+    
+    <title>type.work - beat writer's block with timed writing sessions</title>
+    <meta name="title" content="type.work - Beat Writer's Block with Timed Writing Sessions">
+    <meta name="description" content="Overcome writer's block with type.work. A focused writing tool that erases your text if you stop typing for 6 seconds. Free, private, and browser-based writing sessions.">
+    <meta name="keywords" content="writer's block, writing tool, focused writing, timed writing, writing app, creative writing, free writing tool, writing app with timer">
+    <meta name="author" content="type.work">
+    <meta name="robots" content="index, follow">
+    <link rel="canonical" href="https://type.work/">
+    
+    <link rel="icon" href="write-fabicon.png" type="image/png">
     <link rel="stylesheet" href="style.css">
+    
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "WebApplication",
+      "name": "type.work",
+      "description": "A focused writing tool that helps overcome writer's block by erasing text if you stop typing for 6 seconds.",
+      "url": "https://type.work/",
+      "applicationCategory": "ProductivityApplication",
+      "operatingSystem": "Web Browser",
+      "offers": {
+        "@type": "Offer",
+        "price": "0",
+        "priceCurrency": "USD"
+      },
+      "featureList": [
+        "Timed writing sessions",
+        "Auto-delete on pause",
+        "Private and secure",
+        "AI text rephrasing",
+        "No data storage"
+      ]
+    }
+    </script>
 </head>
 <body>
     <div class="container">
         <div class="setup-screen" id="setupScreen">
             <h1>type.work</h1>
-            <p>Having trouble writing? From that dreaded email to the story you’ve been putting off — this tool helps you break through writer’s block. <b> Stop typing for a six seconds, and everything vanishes.</b></p>
+            <p>Having trouble writing? From that dreaded email to the story you’ve been putting off — this tool forces you break through writer’s block. <b> Stop typing for a six seconds, and everything vanishes.</b></p>
             <p>We don’t store or see your notes — everything stays just on your browser. <a href="https://github.com/sagrd/write" target="_blank" rel="noopener noreferrer">Promise!</a></p>
+            <p>Select a timer and start writing:</b></p>
             <div class="time-options">
                 <button class="time-btn" onclick="startWriting(3)">3 mins</button>
                 <button class="time-btn" onclick="startWriting(5)">5 mins</button>
@@ -51,9 +85,9 @@
             </div>
             <div class="style-options">
                 <button class="style-btn" onclick="selectStyle('original')">Original Text</button>
-                <button class="style-btn" onclick="selectStyle('business')" id="businessBtn">Business</button>
+                <button class="style-btn" onclick="selectStyle('business')" id="businessBtn">Formal</button>
                 <button class="style-btn" onclick="selectStyle('casual')" id="casualBtn"> Casual</button>
-                <button class="style-btn" onclick="selectStyle('correct')" id="correctBtn">Correct</button>
+                <button class="style-btn" onclick="selectStyle('correct')" id="correctBtn">Correct Only</button>
             </div>
             
             <p style="margin: 15px 0 8px 0; font-size: 13px;">Your text:</p>

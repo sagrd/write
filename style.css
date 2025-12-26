@@ -174,91 +174,11 @@ body {
     font-size: 13px;
     font-weight: 600;
 }
-.collapsible-header {
-    cursor: pointer;
-    user-select: none;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-}
-.collapsible-content {
-    margin-top: 10px;
-}
 .api-row {
     display: flex;
     align-items: center;
     gap: 10px;
     flex-wrap: wrap;
-}
-.api-input {
-    flex: 1;
-    min-width: 200px;
-    max-width: 350px;
-    padding: 8px 12px;
-    font-family: monospace;
-    font-size: 12px;
-    border: 1px solid #ccc;
-    border-radius: 4px;
-}
-.help-link {
-    color: #0066cc;
-    cursor: pointer;
-    text-decoration: underline;
-    font-size: 12px;
-    white-space: nowrap;
-}
-.modal {
-    display: none;
-    position: fixed;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background: rgba(0,0,0,0.7);
-    z-index: 1000;
-    justify-content: center;
-    align-items: center;
-}
-.modal-content {
-    background: white;
-    padding: 30px;
-    border-radius: 8px;
-    max-width: 500px;
-    max-height: 80vh;
-    overflow-y: auto;
-}
-.modal-content h2 {
-    margin-bottom: 15px;
-}
-.modal-content ol {
-    margin: 15px 0;
-    padding-left: 20px;
-}
-.modal-content li {
-    margin: 10px 0;
-    line-height: 1.6;
-}
-.close-modal {
-    background: #333;
-    color: white;
-    border: none;
-    padding: 10px 20px;
-    cursor: pointer;
-    border-radius: 4px;
-    margin-top: 15px;
-}
-.processing {
-    color: #666;
-    font-style: italic;
-}
-@keyframes dots {
-    0%, 20% { content: '.'; }
-    40% { content: '..'; }
-    60%, 100% { content: '...'; }
-}
-.loading::after {
-    content: '.';
-    animation: dots 1.5s steps(1) infinite;
 }
 .hidden {
     display: none;

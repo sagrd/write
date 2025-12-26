@@ -7,9 +7,9 @@
         let dangerProgress = 0;
         let originalText = '';
         let timerStarted = false;
-        let geminiApiKey = '';
         let targetWords = 0;
         let isWordMode = false;
+        let completedEarly = false;
         
         function selectMode(mode) {
             document.querySelectorAll('.mode-btn').forEach(btn => btn.classList.remove('active'));
@@ -126,98 +126,6 @@
                 document.getElementById('redOverlay').style.background = 'rgba(255, 0, 0, 0)';
             }, 500);
         }
-        // API Funcitons
-
-        function toggleAiSection() {
-            const content = document.getElementById('aiContent');
-            const toggle = document.getElementById('aiToggle');
-            
-            if (content.classList.contains('hidden')) {
-                content.classList.remove('hidden');
-                toggle.textContent = '▼';
-            } else {
-                content.classList.add('hidden');
-                toggle.textContent = '▶';
-            }
-        }
-        
-        function showApiHelp() {
-            document.getElementById('apiModal').style.display = 'flex';
-        }
-        
-        function closeApiHelp() {
-            document.getElementById('apiModal').style.display = 'none';
-        }
-        function saveApiKey() {
-            document.querySelectorAll('.style-btn').forEach(btn => btn.classList.remove('active'));
-            const key = document.getElementById('apiKey').value.trim();
-            if (key) {
-                geminiApiKey = key;
-                alert('API key saved! You can now use AI rephrasing.');
-            } else {
-                alert('Please enter a valid API key.');
-            }
-        }
-
-        async function rephraseWithGemini(style) {
-
-            const outputEl = document.getElementById('outputText');
-            outputEl.innerHTML = '<span class="processing loading">Rephrasing your text — this might take a moment.</span>';
-            
-            let prompt = '';
-            if (style === 'business') {
-                prompt = `Rephrase the following text in a formal business style. Output text only\n\n${originalText}`;
-            } else if (style === 'casual') {
-                prompt = `Rephrase the following text in a business casual style. Output text only\n\n${originalText}`;
-            } else if (style === 'correct') {
-                prompt = `Only fix errors and keep original voice. Output text only\n\n${originalText}`;
-            }
-            
-            try {
-                const response = await fetch(`https://generativelanguage.googleapis.com/v1/models/gemini-2.5-flash:generateContent?key=${geminiApiKey}`, {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json',
-                    },
-                    body: JSON.stringify({
-                        contents: [{
-                            parts: [{
-                                text: prompt
-                            }]
-                        }]
-                    })
-                });
-                
-                if (!response.ok) {
-                    const errorData = await response.json();
-                    throw new Error(errorData.error?.message || 'API request failed');
-                }
-                
-                const data = await response.json();
-                
-                if (data.candidates && data.candidates[0] && data.candidates[0].content) {
-                    const rephrased = data.candidates[0].content.parts[0].text;
-                    outputEl.textContent = rephrased;
-                } else {
-                    outputEl.textContent = 'Error: Unable to rephrase. Please check your API key.';
-                }
-            } catch (error) {
-                outputEl.textContent = `Error: ${error.message}\n\nPlease verify:\n1. Your API key is correct\n2. You have enabled the Gemini API in Google Cloud Console\n3. Your API key has proper permissions`;
-            }
-        }
-        function selectStyle(style) {
-            document.querySelectorAll('.style-btn').forEach(btn => btn.classList.remove('active'));
-            event.target.classList.add('active');
-            
-            if (style === 'original') {
-                document.getElementById('outputText').textContent = originalText;
-            } else if (!geminiApiKey) {
-                document.getElementById('outputText').textContent = 'Please enter your Gemini API key above to use AI rephrasing.';
-            } else {
-                rephraseWithGemini(style);
-            }
-        }
-        
         function completeSession() {
             clearInterval(dangerTimer);
             clearInterval(mainTimer);
@@ -311,4 +219,3 @@
         window.extendWords = extendWords;
         window.copyText = copyText;
         window.restart = restart;
-        window.toggleAiSection = toggleAiSection;

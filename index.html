@@ -101,45 +101,11 @@
                     <button class="time-btn" onclick="extendWords(500)">+500 words</button>
                 </div>
             </div>
-
-<!--             <div class="api-section">
-                <p class="collapsible-header" onclick="toggleAiSection()">Enable AI Rephrasing (Beta) <span id="aiToggle">▶</span></p>
-                <div class="collapsible-content hidden" id="aiContent">
-                    <div class="api-row">
-                        <input type="password" class="api-input" id="apiKey" placeholder="Enter your Gemini API Key">
-                        <button class="action-btn" onclick="saveApiKey()">Save Key</button>
-                        <span class="help-link" onclick="showApiHelp()">How to get a free key?</span>
-                    </div>
-                    <div class="style-options">
-                        <button class="style-btn" onclick="selectStyle('original')">Original Text</button>
-                        <button class="style-btn" onclick="selectStyle('business')" id="businessBtn">Formal</button>
-                        <button class="style-btn" onclick="selectStyle('casual')" id="casualBtn"> Casual</button>
-                        <button class="style-btn" onclick="selectStyle('correct')" id="correctBtn">Correct Only</button>
-                    </div>
-                </div>
-            </div> -->
             
             <p style="margin: 15px 0 8px 0; font-size: 13px;">Your text:</p>
             <div class="output-text" id="outputText"></div>
             <button class="action-btn" onclick="copyText()">Copy Text</button>
             <button class="action-btn" onclick="restart()">Start Over</button>
-        </div>
-
-        <!-- API Help Modal -->
-        <div class="modal" id="apiModal">
-            <div class="modal-content">
-                <h2>How to Get a Gemini API Key</h2>
-                <ol>
-                    <li>Visit <strong>Google AI Studio</strong> at <a href="https://aistudio.google.com/app/apikey" target="_blank">aistudio.google.com/app/apikey</a></li>
-                    <li>Sign in with your Google account</li>
-                    <li>Click on <strong>"Get API key"</strong> button</li>
-                    <li>Choose <strong>"Create API key in new project"</strong> or select an existing project</li>
-                    <li>Copy the generated API key</li>
-                    <li>Paste it in the API Key field above</li>
-                </ol>
-                <p><strong>Note:</strong> The API key will only be stored in your browser session and never sent to any server except Google's Gemini API.</p>
-                <button class="close-modal" onclick="closeApiHelp()">Close</button>
-            </div>
         </div>
     </div>
     </div>

@@ -47,6 +47,24 @@ body {
     gap: 15px;
     flex-wrap: wrap;
 }
+.mode-selector {
+    display: flex;
+    gap: 10px;
+    margin: 20px 0;
+}
+.mode-btn {
+    padding: 8px 16px;
+    border: 1px solid #666;
+    background: white;
+    cursor: pointer;
+    font-size: 13px;
+    border-radius: 4px;
+    transition: all 0.2s;
+}
+.mode-btn:hover, .mode-btn.active {
+    background: #666;
+    color: white;
+}
 .time-btn {
     padding: 10px 20px;
     border: 1px solid #666;
@@ -155,6 +173,16 @@ body {
     margin: 0 0 8px 0;
     font-size: 13px;
     font-weight: 600;
+}
+.collapsible-header {
+    cursor: pointer;
+    user-select: none;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.collapsible-content {
+    margin-top: 10px;
 }
 .api-row {
     display: flex;

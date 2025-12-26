@@ -8,9 +8,39 @@
         let originalText = '';
         let timerStarted = false;
         let geminiApiKey = '';
+        let targetWords = 0;
+        let isWordMode = false;
+        
+        function selectMode(mode) {
+            document.querySelectorAll('.mode-btn').forEach(btn => btn.classList.remove('active'));
+            event.target.classList.add('active');
+            
+            if (mode === 'time') {
+                document.getElementById('timeOptions').classList.remove('hidden');
+                document.getElementById('wordOptions').classList.add('hidden');
+            } else {
+                document.getElementById('timeOptions').classList.add('hidden');
+                document.getElementById('wordOptions').classList.remove('hidden');
+            }
+        }
+        
+        function startWritingWords(words) {
+            targetWords = words;
+            isWordMode = true;
+            elapsedTime = 0;
+            timerStarted = false;
+            
+            document.getElementById('setupScreen').classList.add('hidden');
+            document.getElementById('writingScreen').classList.remove('hidden');
+            document.getElementById('timerDisplay').textContent = 'Words: 0 / ' + words;
+            
+            document.getElementById('notepad').focus();
+            document.getElementById('notepad').addEventListener('input', handleTyping);
+        }
         
         function startWriting(minutes) {
             targetMinutes = minutes;
+            isWordMode = false;
             elapsedTime = 0;
             timerStarted = false;
 
@@ -53,15 +83,25 @@
         
         function startMainTimer() {
             mainTimer = setInterval(() => {
-                elapsedTime = Date.now() - startTime;
-                const minutes = Math.floor(elapsedTime / 60000);
-                const seconds = Math.floor((elapsedTime % 60000) / 1000);
-                
-                document.getElementById('timerDisplay').textContent = 
-                    `Time: ${String(minutes).padStart(2, '0')}:${String(seconds).padStart(2, '0')}`;
-                
-                if (elapsedTime >= targetMinutes * 60000) {
-                    completeSession();
+                if (isWordMode) {
+                    const text = document.getElementById('notepad').value;
+                    const wordCount = text.trim() ? text.trim().split(/\s+/).length : 0;
+                    document.getElementById('timerDisplay').textContent = `Words: ${wordCount} / ${targetWords}`;
+                    
+                    if (wordCount >= targetWords) {
+                        completeSession();
+                    }
+                } else {
+                    elapsedTime = Date.now() - startTime;
+                    const minutes = Math.floor(elapsedTime / 60000);
+                    const seconds = Math.floor((elapsedTime % 60000) / 1000);
+                    
+                    document.getElementById('timerDisplay').textContent = 
+                        `Time: ${String(minutes).padStart(2, '0')}:${String(seconds).padStart(2, '0')}`;
+                    
+                    if (elapsedTime >= targetMinutes * 60000) {
+                        completeSession();
+                    }
                 }
             }, 1000);
         }
@@ -88,6 +128,19 @@
         }
         // API Funcitons
 
+        function toggleAiSection() {
+            const content = document.getElementById('aiContent');
+            const toggle = document.getElementById('aiToggle');
+            
+            if (content.classList.contains('hidden')) {
+                content.classList.remove('hidden');
+                toggle.textContent = '▼';
+            } else {
+                content.classList.add('hidden');
+                toggle.textContent = '▶';
+            }
+        }
+        
         function showApiHelp() {
             document.getElementById('apiModal').style.display = 'flex';
         }
@@ -173,13 +226,45 @@
             
             originalText = document.getElementById('notepad').value;
             
+            // Show appropriate extend options based on mode
+            if (isWordMode) {
+                document.getElementById('extendTimeOptions').classList.add('hidden');
+                document.getElementById('extendWordOptions').classList.remove('hidden');
+            } else {
+                document.getElementById('extendTimeOptions').classList.remove('hidden');
+                document.getElementById('extendWordOptions').classList.add('hidden');
+            }
+            
             document.getElementById('writingScreen').classList.add('hidden');
             document.getElementById('completeScreen').classList.remove('hidden');
             document.getElementById('outputText').textContent = originalText;
         }
         
+        function extendWords(additionalWords) {
+            const currentText = originalText;
+            
+            targetWords += additionalWords;
+            
+            document.getElementById('completeScreen').classList.add('hidden');
+            document.getElementById('writingScreen').classList.remove('hidden');
+            
+            document.getElementById('notepad').value = currentText;
+            
+            timerStarted = false;
+            
+            if (dangerTimer) clearInterval(dangerTimer);
+            if (mainTimer) clearInterval(mainTimer);
+            
+            document.getElementById('notepad').focus();
+        }
+        
         function extendTime(additionalMinutes) {
             const currentText = originalText;
+            
+            if (isWordMode) {
+                extendWords(additionalMinutes * 50); // Convert minutes to approximate words
+                return;
+            }
             
             targetMinutes += additionalMinutes;
 
@@ -220,6 +305,10 @@
         
         // Make functions available globally
         window.startWriting = startWriting;
+        window.startWritingWords = startWritingWords;
+        window.selectMode = selectMode;
         window.extendTime = extendTime;
+        window.extendWords = extendWords;
         window.copyText = copyText;
         window.restart = restart;
+        window.toggleAiSection = toggleAiSection;

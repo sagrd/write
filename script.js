@@ -7,6 +7,7 @@
         let dangerProgress = 0;
         let originalText = '';
         let timerStarted = false;
+        let geminiApiKey = '';
         
         function startWriting(minutes) {
             targetMinutes = minutes;

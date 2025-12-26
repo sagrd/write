@@ -16,6 +16,9 @@ body {
     max-width: 800px;
     padding: 20px;
 }
+.container:has(.writing-screen:not(.hidden)) {
+    max-width: 1200px;
+}
 .setup-screen, .writing-screen {
     background: white;
     padding: 40px;
